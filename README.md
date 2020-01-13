@@ -55,13 +55,3 @@ nix-shell --run nix-docker-build
 nix-shell --run nix-docker
 
 ```
-
-## Custom `nixpgs`
-
-The `src` can also can be overridden to use a custom
-[nixpkgs](https://github.com/NixOS/nixpkgs) for the image.
-
-```sh
-nix-shell --argstr src ./srcs/2020-01-02.nix nix-docker-build
-
-```
