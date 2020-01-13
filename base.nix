@@ -65,18 +65,14 @@ let
           ];
 
       installPhase = ''
-        mkdir -p $out/run/current-system $out/var
-        ln -s /run $out/var/run
-        ln -s ${path} $out/run/current-system/sw
+        mkdir -p $out/{bin,var,usr/bin,sbin,etc/ssl,etc/nix,run/current-system}
 
-        mkdir -p $out/bin $out/usr/bin $out/sbin
         ln -s ${stdenv.shell} $out/bin/sh
         ln -s ${coreutils}/bin/env $out/usr/bin/env
-
-        mkdir -p $out/etc/ssl
+        ln -s /run $out/var/run
+        ln -s ${path} $out/run/current-system/sw
         ln -s ${cacert}/etc/ssl/certs $out/etc/ssl/certs
 
-        mkdir -p $out/etc/nix
         echo '${nixconf}' > $out/etc/nix/nix.conf
         echo '${passwd}' > $out/etc/passwd
         echo '${group}' > $out/etc/group
