@@ -8,21 +8,17 @@ jobs:
           name: Install Nix
           command: |
             curl https://nixos.org/nix/install | sh
-            . /home/circleci/.nix-profile/etc/profile.d/nix.sh
-            nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
-            nix-channel --update
+            echo "source $HOME/.nix-profile/etc/profile.d/nix.sh" >> $BASH_ENV
       - run:
           name: Build images
-          command: |
-            . /home/circleci/.nix-profile/etc/profile.d/nix.sh
-            nix-shell --run nix-docker-build
+          command: nix-shell --run nix-docker-build
       - run:
-          name: Login to Dockerhub
+          name: Push images to Dockerh Hub if on master branch
           command: |
-            . /home/circleci/.nix-profile/etc/profile.d/nix.sh
-            docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
-      - run:
-          name: Push images
-          command: |
-            . /home/circleci/.nix-profile/etc/profile.d/nix.sh
-            nix-shell --run nix-docker-push
+            if [ "$CIRCLE_BRANCH" == "master" ]; then
+                echo "On master branch, pushing images to Docker Hub..."
+                docker login -u "$DOCKERHUB_USER" -p "$DOCKERHUB_PASSWORD"
+                nix-shell --run nix-docker-push
+            else
+                echo "Not on master branch, skipping pushing to Docker Hub."
+            fi
