@@ -16,7 +16,7 @@ more like [NixOS](https://nixos.org/nixos).
 To build the images and tag them in your Docker instance, run `nix-shell --run
 nix-docker-build`.
 
-`nix-shell --run nix-docker` will take care of building the images, pushing them
+`nix-shell --run nix-docker-all` will take care of building the images, pushing them
 to DockerHub and cleaning up the tags in Docker.
 
 ## Versions
@@ -55,11 +55,15 @@ Several kinds of images are built in this repository:
 
 ## Using the images
 
+The images built with this repository are available on 
+[Docker Hub](https://hub.docker.com/repository/docker/monacoremo/nix).
+
 To use the images you can, for example, run `nix-shell` in them with your
-project or install additional packages to the container's enviroment:
+project. You can also install additional packages to the container's enviroment,
+for example with the following Dockerfile:
 
 ```Dockerfile
-FROM monacoremo/nix:2020-01-14-f9c81b5c
+FROM monacoremo/nix:2020-01-31-62bbc2ab
 
 RUN nix-env -iA \
  nixpkgs.curl \
