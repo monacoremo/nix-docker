@@ -1,4 +1,4 @@
-{ version ? versions/2020-01-14-f9c81b5c.nix
+{ version ? versions/2020-01-31-62bbc2ab.nix
 , repo ? "monacoremo/nix"
 }:
 
