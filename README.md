@@ -3,6 +3,8 @@
 
 [![CircleCI](https://circleci.com/gh/monacoremo/nix-docker.svg?style=svg)](https://circleci.com/gh/monacoremo/nix-docker)
 
+Forked from [LnL7/nix-docker](https://github.com/LnL7/nix-docker)
+
 This repository is used to build custom Docker images that contain the
 [Nix](https://nixos.org/nix) package manager. Whereas the [official docker
 images for Nix](https://hub.docker.com/r/nixos/nix/) are currently based on
