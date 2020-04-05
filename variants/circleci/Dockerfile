@@ -10,3 +10,5 @@ RUN nix-env -f '<nixpkgs>' -iA \
   openssh \
   su-exec \
  && nix-store --gc
+
+RUN nix-env -iA cachix -f https://cachix.org/api/v1/install
